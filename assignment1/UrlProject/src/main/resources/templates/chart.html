@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>ECharts</title>
+  <!-- include echarts.js -->
+<!--  <script type="text/javascript" src="static/js/echarts.min.js"></script>-->
+  <script src="https://cdn.bootcss.com/echarts/4.6.0/echarts.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+</head>
+<body>
+<div id="main" style="width: 1000px;height:400px;"></div>
+<script type="text/javascript" th:inline="javascript">
+  var myChart = echarts.init(document.getElementById('main'));
+
+  var categories = [[${categories}]]
+  var data = [[${data}]]
+  var option = {
+    title: {
+      text: 'Daily Views of the Url'
+    },
+    tooltip: {},
+    legend: {
+      data:['daily views']
+    },
+    xAxis: {
+      data: categories
+    },
+    yAxis: {},
+    series: [{
+      name: 'daily views',
+      type: 'bar',
+      data: data
+    }]
+  };
+  myChart.setOption(option);
+
+</script>
+<div class="form-group">
+  <div class="col-sm-2 control-label">
+    <a href="/list" th:href="@{/list}" class="btn btn-info">back</a>
+  </div>
+</div>
+</body>
+</html>

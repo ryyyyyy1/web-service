@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>ECharts</title>
+  <!-- 引入 echarts.js -->
+<!--  <script type="text/javascript" src="static/js/echarts.min.js"></script>-->
+  <script src="https://cdn.bootcss.com/echarts/4.6.0/echarts.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 1000px;height:400px;"></div>
+<script type="text/javascript" th:inline="javascript">
+  //初始化echarts实例
+  var myChart = echarts.init(document.getElementById('main'));
+
+  var categories = [[${categories}]]
+  var data = [[${data}]]
+  // 指定图表的配置项和数据
+  var option = {
+    title: {
+      text: 'Daily Views of the Url'
+    },
+    tooltip: {},
+    legend: {
+      data:['daily views']
+    },
+    xAxis: {
+      data: categories
+    },
+    yAxis: {},
+    series: [{
+      name: 'daily views',
+      type: 'bar',
+      data: data
+    }]
+  };
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+
+</script>
+<div class="form-group">
+  <div class="col-sm-2 control-label">
+    <a href="/list" th:href="@{/list}" class="btn btn-info">back</a>
+  </div>
+</div>
+</body>
+</html>
