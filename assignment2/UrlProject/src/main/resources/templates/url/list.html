@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Url Pairs List</title>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.css}"></link>
+</head>
+<body class="container">
+<br/>
+<h1>List of Urls</h1>
+<br/><br/>
+<div class="with:80%">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Short Url</th>
+            <th>Long Url</th>
+            <th>Delete</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="urlpair : ${pairs}">
+            <th scope="row" th:text="${urlpair.id}">1</th>
+            <td th:text="${urlpair.shortUrl}">shortUrl</td>
+            <td th:text="${urlpair.longUrl}">longUrl</td>
+<!--            <td><form action="#" th:action="@{/g29(shortUrl=${urlpair.shortUrl})}"  th:method="put">-->
+<!--&lt;!&ndash;            <td><form action="#" th:action="@{/url(id=${urlpair.id})}"  th:method="put">&ndash;&gt;-->
+<!--                <input type="hidden" name="_method" value="put"/>-->
+<!--                <input value="edit" type="submit">-->
+<!--            </form></td>-->
+
+            <td><form action="#" th:action="@{/g29(shortUrl=${urlpair.shortUrl})}"  th:method="delete">
+                <input type="hidden" name="_method" value="delete"/>
+                <input value="delete" type="submit">
+            </form></td>
+
+            <td><a th:href="@{/view(id=${urlpair.id})}">view</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-2 control-label">
+        <a href="/" th:href="@{/}" class="btn btn-info">back</a>
+    </div>
+</div>
+
+</body>
+</html>
